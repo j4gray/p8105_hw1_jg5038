@@ -1,0 +1,12 @@
+---
+title: "p8105_hw1_jg5038"
+author: "Julia Gray"
+date: "2025-09-11"
+output: github_document
+---
+
+## Problem 1
+
+
+
+
