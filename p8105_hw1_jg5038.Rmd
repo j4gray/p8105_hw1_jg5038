@@ -4,8 +4,36 @@ author: "Julia Gray"
 date: "2025-09-11"
 output: github_document
 ---
+```{r echo=TRUE, message=FALSE}
+library(moderndive)
+library(ggplot2)
+```
 
 ## Problem 1
+```{r}
+data("early_january_weather")
+```
+
+The variables in this dataset are `r colnames(early_january_weather)`.
+
+In the year column we can see that the data covers `r unique(early_january_weather$year)` during the `r unique(early_january_weather$month)`st month of the year for `r length(unique(early_january_weather$day))`.
+
+The size of the dataset is `r nrow(early_january_weather)` rows x `r ncol(early_january_weather)` columns
+
+The mean temperature is `r mean(early_january_weather$temp)`
+
+Here is a scatterplot of temp (y) vs time_hour (x):
+```{r}
+ggplot(early_january_weather, aes(x=temp, y=time_hour, color=humid)) + geom_point()
+```
+From the plot we can see that there is a cycle of temperature during the day with higher temperatures observed around midday and humidity going up with temperature. We can also see that the temperature rises as the month progresses with temperatures at the end of the month higher than at the beginning. 
+
+```{r echo=TRUE, message=FALSE}
+ggsave("early_january_weather_plot.png")
+```
+
+
+
 
 
 
