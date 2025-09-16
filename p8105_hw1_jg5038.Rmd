@@ -7,6 +7,7 @@ output: github_document
 ```{r echo=TRUE, message=FALSE}
 library(moderndive)
 library(ggplot2)
+library(tidyverse)
 ```
 
 ## Problem 1
@@ -16,7 +17,7 @@ data("early_january_weather")
 
 The variables in this dataset are `r colnames(early_january_weather)`.
 
-In the year column we can see that the data covers `r unique(early_january_weather$year)` during the `r unique(early_january_weather$month)`st month of the year for `r length(unique(early_january_weather$day))`.
+In the year column we can see that the data covers `r unique(early_january_weather$year)` during the `r unique(early_january_weather$month)`st month of the year for `r length(unique(early_january_weather$day))` days.
 
 The size of the dataset is `r nrow(early_january_weather)` rows x `r ncol(early_january_weather)` columns
 
@@ -31,6 +32,27 @@ From the plot we can see that there is a cycle of temperature during the day wit
 ```{r echo=TRUE, message=FALSE}
 ggsave("early_january_weather_plot.png")
 ```
+
+## Problem 2
+
+### Create tibble:
+```{r}
+var_types_df = tibble(
+  random_samp = rnorm(10),
+  log_vector = random_samp>0,
+  char_vector = c('hello', 'goodbye', 'hello', 'hello', 'goodbye', 'goodbye', 'hello', 'goodbye', 'hello', '!'),
+  factor_vector = factor(char_vector, levels = c("hello", "goodbye", "!"))
+)
+
+```
+### Take the mean of all the columns and see what works:
+
+1. Taking the mean of the random sample works and is `r mean(var_types_df$random_samp)`
+2. Taking the mean of the logical vector also works and is `r mean(var_types_df$log_vector)`
+3. Taking the mean of the character vector does not work and returns `r mean(var_types_df$char_vector)`
+4. Taking the mean of the factor vector does not work and returns `r mean(var_types_df$factor_vector)`
+
+
 
 
 
