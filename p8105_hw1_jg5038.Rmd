@@ -39,7 +39,7 @@ ggsave("early_january_weather_plot.png")
 ```{r}
 var_types_df = tibble(
   random_samp = rnorm(10),
-  log_vector = random_samp>0,
+  logical_vector = random_samp>0,
   char_vector = c('hello', 'goodbye', 'hello', 'hello', 'goodbye', 'goodbye', 'hello', 'goodbye', 'hello', '!'),
   factor_vector = factor(char_vector, levels = c("hello", "goodbye", "!"))
 )
@@ -48,9 +48,19 @@ var_types_df = tibble(
 ### Take the mean of all the columns and see what works:
 
 1. Taking the mean of the random sample works and is `r mean(var_types_df$random_samp)`
-2. Taking the mean of the logical vector also works and is `r mean(var_types_df$log_vector)`
+2. Taking the mean of the logical vector also works and is `r mean(var_types_df$logical_vector)`
 3. Taking the mean of the character vector does not work and returns `r mean(var_types_df$char_vector)`
 4. Taking the mean of the factor vector does not work and returns `r mean(var_types_df$factor_vector)`
+
+
+### Try to convert variables from 1 type to another
+```{r echo=TRUE, message=FALSE}
+test_numeric_logical = as.numeric(var_types_df$logical_vector)
+test_numeric_char = as.numeric(var_types_df$char_vector)
+test_numeric_factor = as.numeric(var_types_df$factor_vector)
+```
+
+It is possible to convert the logical and factor vectors to numbers using the as.numeric function but not the character vector. This explains why it is possible to take the mean of these columns even though they are not explicit numbers to start with.
 
 
 
