@@ -17,11 +17,11 @@ data("early_january_weather")
 
 The variables in this dataset are `r colnames(early_january_weather)`.
 
-In the year column we can see that the data covers `r unique(early_january_weather$year)` during the `r unique(early_january_weather$month)`st month of the year for `r length(unique(early_january_weather$day))` days.
+In the year column we can see that the data covers `r unique(pull(early_january_weather,year))` during the `r unique(pull(early_january_weather,month))`st month of the year for `r length(unique(pull(early_january_weather, day)))` days.
 
 The size of the dataset is `r nrow(early_january_weather)` rows x `r ncol(early_january_weather)` columns
 
-The mean temperature is `r mean(early_january_weather$temp)`
+The mean temperature is `r mean(pull(early_january_weather, temp))`
 
 Here is a scatterplot of temp (y) vs time_hour (x):
 ```{r}
@@ -47,17 +47,17 @@ var_types_df = tibble(
 ```
 ### Take the mean of all the columns and see what works:
 
-1. Taking the mean of the random sample works and is `r mean(var_types_df$random_samp)`
-2. Taking the mean of the logical vector also works and is `r mean(var_types_df$logical_vector)`
-3. Taking the mean of the character vector does not work and returns `r mean(var_types_df$char_vector)`
-4. Taking the mean of the factor vector does not work and returns `r mean(var_types_df$factor_vector)`
+1. Taking the mean of the random sample works and is `r mean(pull(var_types_df, random_samp))`
+2. Taking the mean of the logical vector also works and is `r mean(pull(var_types_df, logical_vector))`
+3. Taking the mean of the character vector does not work and returns `r mean(pull(var_types_df, char_vector))`
+4. Taking the mean of the factor vector does not work and returns `r mean(pull(var_types_df, factor_vector))`
 
 
 ### Try to convert variables from 1 type to another
 ```{r echo=TRUE, message=FALSE}
-test_numeric_logical = as.numeric(var_types_df$logical_vector)
-test_numeric_char = as.numeric(var_types_df$char_vector)
-test_numeric_factor = as.numeric(var_types_df$factor_vector)
+test_numeric_logical = as.numeric(pull(var_types_df, logical_vector))
+test_numeric_char = as.numeric(pull(var_types_df, char_vector))
+test_numeric_factor = as.numeric(pull(var_types_df, factor_vector))
 ```
 
 It is possible to convert the logical and factor vectors to numbers using the as.numeric function but not the character vector. This explains why it is possible to take the mean of these columns even though they are not explicit numbers to start with.
